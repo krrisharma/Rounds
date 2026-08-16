@@ -19,6 +19,7 @@ class Patient(Base):
     __tablename__ = "patients"
 
     id = Column(Integer, primary_key=True, index=True)
+    mrn = Column(String, unique=True, index=True, nullable=False)
     name = Column(String, nullable=False)
     age = Column(Integer, nullable=False)
     gender = Column(String, nullable=False)
@@ -41,8 +42,8 @@ class Vitals(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     patient_id = Column(Integer, ForeignKey("patients.id", ondelete="CASCADE"), nullable=False)
-    recorded_at = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
-    phase = Column(String, nullable=False)  # pre-op, post-op
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
+    phase = Column(String, nullable=True)  # pre-op, post-op
     bp_systolic = Column(Integer, nullable=False)
     bp_diastolic = Column(Integer, nullable=False)
     heart_rate = Column(Integer, nullable=False)

@@ -26,6 +26,7 @@ def seed_db():
         print("Seeding patients...")
         # Patient 1: John Doe (Stable post-op)
         p1 = models.Patient(
+            mrn="MRN-1234",
             name="John Doe",
             age=45,
             gender="Male",
@@ -38,6 +39,7 @@ def seed_db():
         )
         # Patient 2: Jane Smith (Improving pre-op)
         p2 = models.Patient(
+            mrn="MRN-5678",
             name="Jane Smith",
             age=62,
             gender="Female",
@@ -50,6 +52,7 @@ def seed_db():
         )
         # Patient 3: Robert Johnson (Deteriorating post-op)
         p3 = models.Patient(
+            mrn="MRN-9012",
             name="Robert Johnson",
             age=78,
             gender="Male",
@@ -62,6 +65,7 @@ def seed_db():
         )
         # Patient 4: Emily Davis (Discharged)
         p4 = models.Patient(
+            mrn="MRN-3456",
             name="Emily Davis",
             age=29,
             gender="Female",
@@ -88,7 +92,7 @@ def seed_db():
             recorded_at = base_time + datetime.timedelta(hours=i * 8)
             p1_vitals.append(models.Vitals(
                 patient_id=p1.id,
-                recorded_at=recorded_at,
+                timestamp=recorded_at,
                 phase="post-op",
                 bp_systolic=120 + (i % 3),
                 bp_diastolic=80 - (i % 2),
@@ -107,7 +111,7 @@ def seed_db():
             recorded_at = base_time + datetime.timedelta(hours=i * 6)
             p2_vitals.append(models.Vitals(
                 patient_id=p2.id,
-                recorded_at=recorded_at,
+                timestamp=recorded_at,
                 phase="pre-op",
                 bp_systolic=135 - (i * 2),
                 bp_diastolic=85 - (i % 2),
@@ -137,7 +141,7 @@ def seed_db():
             recorded_at = base_time + datetime.timedelta(hours=i * 6)
             p3_vitals.append(models.Vitals(
                 patient_id=p3.id,
-                recorded_at=recorded_at,
+                timestamp=recorded_at,
                 phase="post-op",
                 bp_systolic=data[0],
                 bp_diastolic=data[1],
@@ -156,7 +160,7 @@ def seed_db():
             recorded_at = base_time + datetime.timedelta(hours=i * 12)
             p4_vitals.append(models.Vitals(
                 patient_id=p4.id,
-                recorded_at=recorded_at,
+                timestamp=recorded_at,
                 phase="post-op",
                 bp_systolic=118 + (i % 2),
                 bp_diastolic=78,

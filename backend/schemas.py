@@ -42,11 +42,11 @@ class MedicationResponse(MedicationBase):
 
 # Vitals Schemas
 class VitalsBase(BaseModel):
-    phase: Literal["pre-op", "post-op"]
+    phase: Optional[Literal["pre-op", "post-op"]] = None
     bp_systolic: int
     bp_diastolic: int
     heart_rate: int = Field(..., ge=20, le=250)
-    temperature: float = Field(..., ge=30.0, le=45.0)
+    temperature: float = Field(..., ge=30.0, le=115.0)
     spo2: int = Field(..., ge=0, le=100)
     pain_score: int = Field(..., ge=0, le=10)
     condition_tag: Literal["Stable", "Improving", "Deteriorating", "Critical"]
@@ -59,7 +59,7 @@ class VitalsCreate(VitalsBase):
 class VitalsResponse(VitalsBase):
     id: int
     patient_id: int
-    recorded_at: datetime
+    timestamp: datetime
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -78,9 +78,15 @@ class DischargeRecordResponse(DischargeRecordBase):
 
     model_config = ConfigDict(from_attributes=True)
 
+# Summary Schema
+class SummaryResponse(BaseModel):
+    text: str
+    status: str
+
 # Patient Schemas
 class PatientBase(BaseModel):
     name: str
+    mrn: str
     age: int
     gender: str
     admission_date: str
