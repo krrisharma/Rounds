@@ -81,7 +81,7 @@ export default function SummaryPage() {
 
   async function handleFinalize() {
     const finalized = await api.finalizeSummary(id);
-    setSummary(finalized);
+    setSummary(prev => ({ ...prev, ...finalized }));
   }
 
   return (
