@@ -77,11 +77,17 @@ export default function SummaryPage() {
   async function handleSave(text) {
     const saved = await api.saveSummary(id, text);
     setSummary(saved);
+    alert("Draft saved successfully!");
   }
 
   async function handleFinalize() {
     const finalized = await api.finalizeSummary(id);
     setSummary(prev => ({ ...prev, ...finalized }));
+    
+    // Huge hackathon flex: Automatically trigger the print dialog!
+    setTimeout(() => {
+      window.print();
+    }, 500);
   }
 
   return (
