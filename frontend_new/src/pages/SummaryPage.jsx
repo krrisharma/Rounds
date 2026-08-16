@@ -91,26 +91,28 @@ export default function SummaryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-paper">
-      <AppHeader />
-      <main className="max-w-3xl mx-auto px-6 py-8">
-        <Link to={`/patient/${id}`} className="text-sm text-muted hover:text-ink mb-4 inline-block">← Back to patient</Link>
+    <div className="min-h-screen bg-paper print:bg-white print:m-0 print:p-0">
+      <div className="print:hidden">
+        <AppHeader />
+      </div>
+      <main className="max-w-3xl mx-auto px-6 py-8 print:p-0 print:max-w-none">
+        <Link to={`/patient/${id}`} className="text-sm text-muted hover:text-ink mb-4 inline-block print:hidden">← Back to patient</Link>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-1">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-1 print:mb-4">
           <div>
-            <h1 className="text-xl font-semibold text-ink">Discharge summary</h1>
-            {patient && <p className="text-sm text-muted mt-1">{patient.name} · {patient.mrn}</p>}
+            <h1 className="text-xl font-semibold text-ink print:text-black">Discharge summary</h1>
+            {patient && <p className="text-sm text-muted mt-1 print:text-gray-700">{patient.name} · {patient.mrn}</p>}
           </div>
           {summary && !generating && summary.status !== "final" && (
             <button
               onClick={handleRegenerate}
-              className="text-sm text-teal hover:text-teal-dark font-medium"
+              className="text-sm text-teal hover:text-teal-dark font-medium print:hidden"
             >
               Regenerate ↻
             </button>
           )}
         </div>
-        <WaveformDivider className="mb-6 mt-4" />
+        <WaveformDivider className="mb-6 mt-4 print:hidden" />
 
         {error && (
           <div className="bg-alert-light border border-alert/30 text-alert text-sm rounded-lg p-4 mb-5">{error}</div>
